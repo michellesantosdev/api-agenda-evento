@@ -1,5 +1,5 @@
 from django.http import HttpResponse
 
 
-def home(request):
+def home():
     return HttpResponse('Oi, cliente')

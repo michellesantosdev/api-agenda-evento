@@ -2,4 +2,4 @@ from django.http import HttpResponse
 
 
 def home(requests):
-    return HttpResponse('Oi, cliente LINDO')
+    return HttpResponse('OIE, cliente LINDO')

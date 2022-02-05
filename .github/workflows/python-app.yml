@@ -24,3 +24,9 @@ jobs:
       run: pip install -r requirements-dev.txt
     - name: Lint with flake8
       run: flake8
+    - name: Test with pytest
+      run: pytest --cov=agenda_evento --cov-report=html
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: 686606e7-42ac-4645-96cf-6e9368a39694

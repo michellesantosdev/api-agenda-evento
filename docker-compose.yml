@@ -1,0 +1,15 @@
+version: "3.3"
+
+services:
+  database:
+    container_name: api_agenda_evento_database
+    image: postgres
+    restart: always
+    volumes:
+      - ./.pgdata:/var/lib/postgresql/data
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_USER=morena
+      - POSTGRES_PASSWORD=senhadamorena
+    ports:
+      - 5434:5432

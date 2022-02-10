@@ -3,18 +3,20 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from agenda_evento.api.models import Evento
+from agenda_evento.api.serializers import EventSerializer
 
 
 class EventoViews(GenericViewSet):
+    serializer_class = EventSerializer
 
-    def create(self, request):
-        response_dados = {
-            'mensagem': 'Dados recebidos com sucesso',
-            'dados': request.data
-        }
+    def create(self, request):  # json
+        serializer = self.get_serializer(data=request.data)  # serialização do json -> objeto
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-        return Response(response_dados, status.HTTP_201_CREATED)
+        return Response({"message": f"Evento {serializer.data['titulo']} criado com sucesso."}, status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        todos_eventos = Evento.objects.all()
-        return Response(todos_eventos, status.HTTP_200_OK)
+        listagem_eventos = Evento.objects.all()  # objeto
+        serializer = self.get_serializer(listagem_eventos, many=True) # serialização do objeto > json
+        return Response(data=serializer.data, status=status.HTTP_200_OK)  # json

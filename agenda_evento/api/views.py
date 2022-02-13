@@ -9,14 +9,15 @@ from agenda_evento.api.serializers import EventSerializer
 class EventoViews(GenericViewSet):
     serializer_class = EventSerializer
 
-    def create(self, request):  # json
-        serializer = self.get_serializer(data=request.data)  # serialização do json -> objeto
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
-        return Response({"message": f"Evento {serializer.data['titulo']} criado com sucesso."}, status=status.HTTP_201_CREATED)
+        return Response({"message": f"Evento {serializer.data['titulo']} criado com sucesso."},
+                        status=status.HTTP_201_CREATED)
 
     def list(self, request):
-        listagem_eventos = Evento.objects.all()  # objeto
-        serializer = self.get_serializer(listagem_eventos, many=True) # serialização do objeto > json
-        return Response(data=serializer.data, status=status.HTTP_200_OK)  # json
+        listagem_eventos = Evento.objects.all()
+        serializer = self.get_serializer(listagem_eventos, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)

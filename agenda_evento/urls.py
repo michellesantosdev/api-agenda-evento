@@ -16,12 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
 from agenda_evento.api.urls import app_name
 from agenda_evento.base.views import home
 
+schema_view = get_schema_view(openapi.Info("API AGENDA EVENTOS", 'v1'), public=True)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('teste', home),
+    path('swagger/', schema_view.with_ui(), name='schema-swagger-ui'),
     path('api/v1/', include('agenda_evento.api.urls', namespace=app_name)),
 ]

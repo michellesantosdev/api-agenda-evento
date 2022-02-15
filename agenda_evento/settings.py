@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'agenda_evento.api'
+    'agenda_evento.api',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [

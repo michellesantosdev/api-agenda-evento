@@ -46,4 +46,3 @@ class EventoViews(GenericViewSet):
         evento.delete()
         data_response = {'id': pk, 'message': 'Evento removido com sucesso.'}
         return Response(data=data_response, status=status.HTTP_201_CREATED)
-

@@ -24,7 +24,7 @@ def test_deve_remover_evento(client: Client):
     response_delete = client.delete(f'/api/v1/eventos/{id_evento_criado}')
 
     # THEN
-    assert response_delete.status_code == 200
+    assert response_delete.status_code == 201
     assert response_delete.data['id'] == str(id_evento_criado)
     assert response_delete.data['message'] == 'Evento removido com sucesso.'
 

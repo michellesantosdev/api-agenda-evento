@@ -45,4 +45,4 @@ class EventoViews(GenericViewSet):
         evento = get_object_or_404(self.queryset, pk=pk)
         evento.delete()
         data_response = {'id': pk, 'message': 'Evento removido com sucesso.'}
-        return Response(data=data_response, status=status.HTTP_200_OK)
+        return Response(data=data_response, status=status.HTTP_201_OK)

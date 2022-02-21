@@ -1,7 +1,7 @@
 import pytest
 
 from django.test import Client
-
+import json
 
 pytestmark = [pytest.mark.django_db]
 
@@ -147,3 +147,20 @@ def test_deve_criar_evento(client: Client):
 
     response_mensagem = response.data['message']
     assert response_mensagem == 'Evento Call de Alinhamento criado com sucesso.'
+
+def test_nao_deve_criar_evento_sem_titulo(client : Client):
+    dados_compo_requisicao = {
+
+        "data": "2021-12-09",
+        "horario_inicio": "16:40",
+        "horario_fim": "17:08",
+        "convidados": ["janiojs@icloud.com"],
+        "local": "https://meet.google.com/rbr-hhfr-mnt",
+        "descricao": "Call para alinhar próximos módulos do curso"
+    }
+
+    response = client.post(path='/api/v1/eventos', data=dados_compo_requisicao)
+    assert response.status_code == 400
+    content = json.loads(response.content.decode())
+    assert content['titulo'] == ['This field is required.']
+

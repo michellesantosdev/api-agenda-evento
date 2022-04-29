@@ -1,3 +1,5 @@
+## Projeto desenvolvido no curso Desenvolvedor Contratado
+
 # api-agenda-evento
 Api de Agenda de Evento
 
